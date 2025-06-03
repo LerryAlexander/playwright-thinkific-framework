@@ -15,7 +15,7 @@ export async function loginViaAPI(): Promise<BrowserContext> {
   const { Username, Password } = await getUserCredentials();
 
   const requestContext = await request.newContext();
-  const response = await requestContext.post(`${baseUrl}${routes.onboardingSignIn}`, {
+  const response = await requestContext.post(`${baseUrl}${routes.signIn}`, {
     form: {
       'user[email]': Username,
       'user[password]': Password,
