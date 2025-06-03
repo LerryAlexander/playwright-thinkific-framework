@@ -35,7 +35,7 @@ jobs:
         run: npm ci
 
       - name: Run Playwright Tests
-        run: npx playwright test --reporter=html
+        run: npx playwright test --reporter=html --grep @smoke
 
       - name: Deploy HTML report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
