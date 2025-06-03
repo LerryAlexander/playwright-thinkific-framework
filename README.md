@@ -90,7 +90,58 @@ npx playwright test
 npx playwright test tests/course-creation.spec.ts
 ```
 
-### 5. Open HTML report
+### 5. Run tests using Chromium
+
+```bash
+npx playwright test --project=chromium
+```
+
+### 6. Run tests using Firefox
+
+```bash
+npx playwright test --project=firefox
+```
+
+### 7. Run tests using WebKit
+
+```bash
+npx playwright test --project=webkit
+```
+
+### 8. Run tests in headed mode (UI visible)
+
+```bash
+npx playwright test --headed
+```
+
+Or combine with a specific browser:
+
+```bash
+npx playwright test --headed --project=chromium
+```
+
+### 9. Run tests sequentially (no parallel execution)
+
+```bash
+npx playwright test --workers=1
+```
+
+### 10. Run tests with custom parallelism
+
+```bash
+npx playwright test --workers=4
+```
+
+## 🐳 Run Tests with Docker Compose
+
+
+### 1. Run all tests
+
+```bash
+docker-compose up --build
+```
+
+### Open HTML report
 
 ```bash
 npx playwright show-report
@@ -130,25 +181,6 @@ Authentication is managed via the `loginViaAPI()` utility, which:
 
 ---
 
-
-## 🐳 Run Tests with Docker Compose
-
-
-### 1. Run all tests
-
-```bash
-docker-compose up --build
-```
-
-### 3. View HTML report
-
-After the test run:
-
-```bash
-npx playwright show-report
-```
-
-This command will show the local `playwright-report` folder mounted from the container.
 
 
 
