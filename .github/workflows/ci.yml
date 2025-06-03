@@ -45,7 +45,9 @@ jobs:
         uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
+          name: playwright-report
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          path: playwright-report/
           publish_dir: ./playwright-report
           publish_branch: gh-pages
           retention-days: 30
