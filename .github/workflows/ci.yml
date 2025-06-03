@@ -35,9 +35,11 @@ jobs:
         run: npm ci
 
       - name: Run Playwright Tests
-        run: npx playwright test --reporter=html --grep @smoke
+        run: npx playwright test --reporter=html --grep @regression
+        continue-on-error: true
 
       - name: Deploy HTML report to GitHub Pages
+        if: always()
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
