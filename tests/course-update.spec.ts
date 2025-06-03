@@ -32,18 +32,29 @@ test.describe('Course Update Actions', () => {
       await coursePage.updateCourseDescription(newDescription);
       await coursePage.saveSettings();
 
+      // Validate course title is updated in the list
       await coursePage.goToCourseList();
       const updatedTitle = await coursePage.getFirstCourseTitle();
-      await expect(updatedTitle).toContain(newTitle);
+
+      await expect(
+        updatedTitle,
+        `Expected course list to reflect updated title "${newTitle}"`
+      ).toContain(newTitle);
     });
 
     test('Set Course Pricing: One-time payment', async () => {
       await coursePage.goToFirstCourse();
 
-      await coursePage.setOneTimePricing('49.99', '60'); // price, duration
+      const price = '49.99';
+      const duration = '60';
 
-      await expect(coursePage.toastMessage).toContainText(TEXT_LABELS.SUCCESS_UPDATE_PRICE);
+      await coursePage.setOneTimePricing(price, duration);
+
+      // Verify success toast message is shown
+      await expect(
+        coursePage.toastMessage,
+        `Expected success toast message after setting one-time pricing`
+      ).toContainText(TEXT_LABELS.SUCCESS_UPDATE_PRICE);
     });
   });
 });
-

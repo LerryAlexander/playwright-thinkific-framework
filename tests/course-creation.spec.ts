@@ -21,7 +21,7 @@ test.describe('Course Automation Flow', () => {
   test.afterEach(async () => {
     await context.close();
   });
-  
+
   test.describe('@regression @smoke', () => {
     test('Start AI Course Creation', async () => {
       const managePage = new ManagePage(page);
@@ -33,17 +33,18 @@ test.describe('Course Automation Flow', () => {
       const description = generateCourseDescription();
       await generateCoursePage.generateCourse(description);
 
-      await expect(coursePage.chapterListContainer).toBeVisible();
-      await expect(coursePage.getChapters()).toHaveCount(5);
+      await expect(coursePage.chapterListContainer, 'Chapter list container should be visible after course generation').toBeVisible();
+      await expect(coursePage.getChapters(), 'Course should contain exactly 5 chapters after AI generation').toHaveCount(5);
     });
   });
 
- test.describe('@regression', () => {
+  test.describe('@regression', () => {
     test('Add Chapter to Existing Course', async () => {
       await coursePage.goToFirstCourse();
       const title = generateChapterTitle();
       await coursePage.addNewChapter(title);
-      await expect(coursePage.lastChapterTitle).toContainText(title);
+
+      await expect(coursePage.lastChapterTitle, `Last chapter title should include: "${title}"`).toContainText(title);
     });
 
     test('Add Text Lesson to Existing Course', async () => {
@@ -54,7 +55,9 @@ test.describe('Course Automation Flow', () => {
       const content = faker.lorem.paragraphs(2);
 
       await coursePage.fillTextLessonForm(title, content);
-      await expect(coursePage.getLessonByTitle(title)).toBeVisible();
+
+      const lessonLocator = coursePage.getLessonByTitle(title);
+      await expect(lessonLocator, `Lesson with title "${title}" should be visible in the list`).toBeVisible();
     });
   });
 });

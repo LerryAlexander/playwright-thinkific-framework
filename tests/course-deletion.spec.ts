@@ -29,12 +29,22 @@ test.describe('Delete Course Flow', () => {
       await coursePage.goToCourseSettings();
       await coursePage.deleteCourse();
 
-      await expect(page).toHaveURL(`${baseUrl}${routes.coursesList}`);
+      // Validate redirection after deletion
+      await expect(
+        page,
+        `Page should navigate back to course list after deleting course`
+      ).toHaveURL(`${baseUrl}${routes.coursesList}`);
 
       const newFirstTitle = await coursePage.getFirstCourseTitle();
-      expect(newFirstTitle?.trim()).not.toBe(originalTitle?.trim());
+
+      // Verify course was removed by comparing titles
+      expect(
+        newFirstTitle?.trim(),
+        `Expected the first course title to change after deletion, but it remained the same`
+      ).not.toBe(originalTitle?.trim());
     });
   });
 });
+
 
 
