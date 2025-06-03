@@ -23,7 +23,8 @@ export async function loginViaAPI(): Promise<BrowserContext> {
   });
 
   if (response.status() !== 302 && response.status() !== 200) {
-    throw new Error(`Login failed: ${response.status()}`);
+    const responseBody = await response.text(); // get raw response body
+    throw new Error(`Login failed: ${response.status()}\nResponse Body:\n${responseBody}`);
   }
 
   const storageState = await requestContext.storageState();
