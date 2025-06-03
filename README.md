@@ -81,43 +81,19 @@ AWS_REGION=us-east-1
 ### 3. Run all tests
 
 ```bash
-npx playwright test
+npx playwright test --grep @regression
 ```
 
-### 4. Run a specific test file
+### 4. Run smoke tests
+
+```bash
+npx playwright test --grep @smoke
+```
+
+### 5. Run a specific test file
 
 ```bash
 npx playwright test tests/course-creation.spec.ts
-```
-
-### 5. Run tests using Chromium
-
-```bash
-npx playwright test --project=chromium
-```
-
-### 6. Run tests using Firefox
-
-```bash
-npx playwright test --project=firefox
-```
-
-### 7. Run tests using WebKit
-
-```bash
-npx playwright test --project=webkit
-```
-
-### 8. Run tests in headed mode (UI visible)
-
-```bash
-npx playwright test --headed
-```
-
-Or combine with a specific browser:
-
-```bash
-npx playwright test --headed --project=chromium
 ```
 
 ### 9. Run tests sequentially (no parallel execution)
@@ -147,7 +123,7 @@ docker-compose up --build
 npx playwright show-report
 ```
 
-## 📦 GitHub Pages Test Report
+## 📦 GitHub Pages Test Report (Running from CI/CD Github actions)
 
 ➡️ **Test Report Link**  
 * https://lerryalexander.github.io/playwright-thinkific-framework/
