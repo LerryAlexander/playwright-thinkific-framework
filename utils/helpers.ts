@@ -14,6 +14,9 @@ import { Page } from '@playwright/test';
 export async function loginViaAPI(): Promise<BrowserContext> {
   const { Username, Password } = await getUserCredentials();
 
+  console.log('🔐 Username:', Username);
+  console.log('🔐 Password:', Password);
+
   const requestContext = await request.newContext();
   const response = await requestContext.post(`${baseUrl}${routes.signIn}`, {
     form: {
