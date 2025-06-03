@@ -3,6 +3,7 @@ name: Run Playwright Tests and Deploy Report
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   test-and-deploy:
