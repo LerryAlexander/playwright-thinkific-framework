@@ -6,7 +6,7 @@ export default defineConfig({
   expect: {
     timeout: 5000,
   },
-  fullyParallel: false,
+  fullyParallel: true,
   retries: 1,
   use: {
     headless: false,
@@ -18,7 +18,7 @@ export default defineConfig({
     actionTimeout: 15 * 1000, // 15s per action
     navigationTimeout: 30 * 1000, // 30s for navigation
   },
-  projects: [
+  /*projects: [
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
@@ -31,6 +31,6 @@ export default defineConfig({
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
     },
-  ],
+  ],*/
   reporter: [['html', { outputFolder: 'playwright-report', open: 'never' }]]
 });
