@@ -19,29 +19,31 @@ test.describe('Course Update Actions', () => {
   test.afterEach(async () => {
     await context.close();
   });
-  
-  test('Update Course Title and Description', async () => {
-    await coursePage.goToFirstCourse();
-    await coursePage.goToCourseSettings();
 
-    const newTitle = `Course: ${faker.company.catchPhrase()}`;
-    const newDescription = faker.lorem.sentences(2);
+  test.describe('@regression @update', () => {
+    test('Update Course Title and Description', async () => {
+      await coursePage.goToFirstCourse();
+      await coursePage.goToCourseSettings();
 
-    await coursePage.updateCourseTitle(newTitle);
-    await coursePage.updateCourseDescription(newDescription);
-    await coursePage.saveSettings();
+      const newTitle = `Course: ${faker.company.catchPhrase()}`;
+      const newDescription = faker.lorem.sentences(2);
 
-    // Go back to course list to validate the title update
-    await coursePage.goToCourseList();
-    const updatedTitle = await coursePage.getFirstCourseTitle();
-    await expect(updatedTitle).toContain(newTitle);
-  });
+      await coursePage.updateCourseTitle(newTitle);
+      await coursePage.updateCourseDescription(newDescription);
+      await coursePage.saveSettings();
 
-  test('Set Course Pricing: One-time payment', async () => {
-    await coursePage.goToFirstCourse();
+      await coursePage.goToCourseList();
+      const updatedTitle = await coursePage.getFirstCourseTitle();
+      await expect(updatedTitle).toContain(newTitle);
+    });
 
-    await coursePage.setOneTimePricing('49.99', '60'); // price, duration
+    test('Set Course Pricing: One-time payment', async () => {
+      await coursePage.goToFirstCourse();
 
-    await expect(coursePage.toastMessage).toContainText(TEXT_LABELS.SUCCESS_UPDATE_PRICE);
+      await coursePage.setOneTimePricing('49.99', '60'); // price, duration
+
+      await expect(coursePage.toastMessage).toContainText(TEXT_LABELS.SUCCESS_UPDATE_PRICE);
+    });
   });
 });
+

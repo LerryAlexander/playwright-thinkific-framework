@@ -22,37 +22,39 @@ test.describe('Course Automation Flow', () => {
     await context.close();
   });
   
-  test('Start AI Course Creation', async () => {
-    const managePage = new ManagePage(page);
-    const generateCoursePage = new GenerateCoursePage(page);
+  test.describe('@regression @smoke', () => {
+    test('Start AI Course Creation', async () => {
+      const managePage = new ManagePage(page);
+      const generateCoursePage = new GenerateCoursePage(page);
 
-    await page.goto(`${baseUrl}${routes.manage}`);
-    await managePage.startCourseCreation();
+      await page.goto(`${baseUrl}${routes.manage}`);
+      await managePage.startCourseCreation();
 
-    const description = generateCourseDescription();
-    await generateCoursePage.generateCourse(description);
+      const description = generateCourseDescription();
+      await generateCoursePage.generateCourse(description);
 
-    await expect(coursePage.chapterListContainer).toBeVisible();
-    await expect(coursePage.getChapters()).toHaveCount(5);
+      await expect(coursePage.chapterListContainer).toBeVisible();
+      await expect(coursePage.getChapters()).toHaveCount(5);
+    });
   });
 
-  test('Add Chapter to Existing Course', async () => {
-    await coursePage.goToFirstCourse();
-    const title = generateChapterTitle();
-    await coursePage.addNewChapter(title);
-    await expect(coursePage.lastChapterTitle).toContainText(title);
-  });
+ test.describe('@regression', () => {
+    test('Add Chapter to Existing Course', async () => {
+      await coursePage.goToFirstCourse();
+      const title = generateChapterTitle();
+      await coursePage.addNewChapter(title);
+      await expect(coursePage.lastChapterTitle).toContainText(title);
+    });
 
-  test('Add Text Lesson to Existing Course', async () => {
-    await coursePage.goToFirstCourse();
-    await coursePage.addLessonToChapter('Text');
+    test('Add Text Lesson to Existing Course', async () => {
+      await coursePage.goToFirstCourse();
+      await coursePage.addLessonToChapter('Text');
 
-    const title = faker.lorem.words(4);
-    const content = faker.lorem.paragraphs(2);
+      const title = faker.lorem.words(4);
+      const content = faker.lorem.paragraphs(2);
 
-    await coursePage.fillTextLessonForm(title, content);
-    await expect(coursePage.getLessonByTitle(title)).toBeVisible();
+      await coursePage.fillTextLessonForm(title, content);
+      await expect(coursePage.getLessonByTitle(title)).toBeVisible();
+    });
   });
 });
-
-

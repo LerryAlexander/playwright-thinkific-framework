@@ -18,20 +18,23 @@ test.describe('Delete Course Flow', () => {
   test.afterEach(async () => {
     await context.close();
   });
-  
-  test('Delete Course', async () => {
-    await coursePage.goToCourseList();
 
-    const originalTitle = await coursePage.getFirstCourseTitle();
+  test.describe('@regression @deletion', () => {
+    test('Delete Course', async () => {
+      await coursePage.goToCourseList();
 
-    await coursePage.goToFirstCourse();
-    await coursePage.goToCourseSettings();
-    await coursePage.deleteCourse();
+      const originalTitle = await coursePage.getFirstCourseTitle();
 
-    await expect(page).toHaveURL(`${baseUrl}${routes.coursesList}`);
+      await coursePage.goToFirstCourse();
+      await coursePage.goToCourseSettings();
+      await coursePage.deleteCourse();
 
-    const newFirstTitle = await coursePage.getFirstCourseTitle();
-    expect(newFirstTitle?.trim()).not.toBe(originalTitle?.trim());
+      await expect(page).toHaveURL(`${baseUrl}${routes.coursesList}`);
+
+      const newFirstTitle = await coursePage.getFirstCourseTitle();
+      expect(newFirstTitle?.trim()).not.toBe(originalTitle?.trim());
+    });
   });
 });
+
 
