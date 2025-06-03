@@ -20,10 +20,6 @@ export async function loginViaAPI(): Promise<BrowserContext> {
       'user[email]': Username,
       'user[password]': Password,
     },
-    headers: {
-    'User-Agent': 'Mozilla/5.0 (Playwright GitHub Runner)',
-    'Content-Type': 'application/x-www-form-urlencoded',
-  },
   });
 
   if (response.status() !== 302 && response.status() !== 200) {
