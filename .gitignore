@@ -2,5 +2,5 @@ node_modules
 playwright-report
 .env
 .git
-test-results
+test-results/
 
