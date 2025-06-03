@@ -96,13 +96,13 @@ npx playwright test --grep @smoke
 npx playwright test tests/course-creation.spec.ts
 ```
 
-### 9. Run tests sequentially (no parallel execution)
+### 6. Run tests sequentially (no parallel execution)
 
 ```bash
 npx playwright test --workers=1
 ```
 
-### 10. Run tests with custom parallelism
+### 7. Run tests with custom parallelism
 
 ```bash
 npx playwright test --workers=4
