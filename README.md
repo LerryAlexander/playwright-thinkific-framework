@@ -216,6 +216,24 @@ Authentication is managed via the `loginViaAPI()` utility, which:
 
 ---
 
+## 🔮 Future Improvements
+
+- **✅ Full CI/CD Execution via GitHub Actions**  
+  Although the test suite executes successfully, the deployment to GitHub Pages is currently not functioning due to a CI/CD pipeline issue. A future improvement would be to fully stabilize the workflow so that reports are automatically published on every push to `main`.
+
+- **🧪 Expand UI Test Coverage**  
+  Additional test scenarios can be implemented to cover:
+  - Visual elements
+  - Verification of dynamic titles, subtitles, and content blocks
+  
+- **🚫 Negative Test Scenarios**  
+  - Course creation with invalid or incomplete data
+  - Navigation edge cases like "Back" button behavior
+  - Validation errors for empty or duplicate input fields
+
+- **📊 Test Results Dashboard**  
+  Integrate a visual dashboard or reporting system such as TestRail.
+
 
 
 
