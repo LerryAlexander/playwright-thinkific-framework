@@ -12,8 +12,13 @@ export interface ThinkificCredentials {
 }
 
 export async function getUserCredentials(): Promise<ThinkificCredentials> {
-  const secretName = process.env.AWS_SECRET_NAME!;
-  const region = process.env.AWS_REGION!;
+  const secretName = process.env.AWS_SECRET_NAME
+    ? process.env.AWS_SECRET_NAME
+    : 'Thinkific_Credentials_Course_Creator';
+
+  const region = process.env.AWS_REGION
+    ? process.env.AWS_REGION
+    : 'us-east-1';
   const client = new SecretsManagerClient({ region });
 
   try {
