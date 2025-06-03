@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  playwright-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: playwright-thinkific
+    env_file:
+      - .env
+    volumes:
+      - ./:/app
+      - ./playwright-report:/app/playwright-report
+    command: npx playwright test

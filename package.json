@@ -1,0 +1,27 @@
+{
+  "name": "thinkific-playwright-framework",
+  "version": "1.0.0",
+  "description": "Automation framework using Playwright and TypeScript for Thinkific AI Course Creation",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^22.15.29",
+    "ts-node": "^10.0.0",
+    "typescript": "^5.0.0"
+  },
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.821.0",
+    "@faker-js/faker": "^9.8.0",
+    "dotenv": "^16.5.0"
+  },
+  "author": "Lerry Ortiz",
+  "license": "ISC"
+}
