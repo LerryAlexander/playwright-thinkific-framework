@@ -99,7 +99,7 @@ npx playwright show-report
 ## 📦 GitHub Pages Test Report
 
 ➡️ **Test Report Link**  
-*(Link via GitHub Actions)*
+* https://lerryalexander.github.io/playwright-thinkific-framework/
 
 ---
 
