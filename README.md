@@ -13,7 +13,7 @@ This repository contains a complete **Playwright + TypeScript** testing framewor
 - ✅ Deleting courses
 - ✅ Cloudflare challenge handling
 - ✅ Page Object Model structure
-- ✅ CI-ready with GitHub Actions
+- ❌ CI-ready with GitHub Actions
 - ✅ HTML reports via GitHub Pages
 - ✅ Run with Docker
 
@@ -63,7 +63,7 @@ project-root/
 
 ---
 
-## ✅ How to Run Tests
+## ✅ Set Up to Run Tests Locally
 
 ### 1. Install dependencies
 
@@ -71,42 +71,112 @@ project-root/
 npm install
 ```
 
+### 🔐 AWS Credentials Setup (Required for Local Test Execution)
+
+In order to fetch secure login credentials from **AWS Secrets Manager**, you need to set up your AWS credentials locally. This step is **required** to run the tests using `loginViaAPI()`.
+
+#### 🪪 Step-by-Step Instructions
+
+1. **Create AWS credentials directory** (if it doesn’t exist):
+
+    ```bash
+    mkdir -p ~/.aws
+    ```
+
+2. **Create the credentials file**:
+
+    ```bash
+    touch ~/.aws/credentials
+    ```
+
+3. **Edit the file** and paste the following:
+
+    ```ini
+    [default]
+    aws_access_key_id=THE_ACCESS_KEY
+    aws_secret_access_key=THE_SECRET_KEY
+    ```
+
+    > 🔒 Replace `THE_ACCESS_KEY` and `THE_SECRET_KEY` with values **I will be sharing privately**.
+
+4. **Create the configuration file** (optional but recommended):
+
+    ```bash
+    touch ~/.aws/config
+    ```
+
+5. **Edit `~/.aws/config`** and set your region:
+
+    ```ini
+    [default]
+    region=us-east-1
+    ```
+
+---
+
 ### 2. Configure your `.env`
 
 ```env
 THINKIFIC_SECRET_NAME=Thinkific_Credentials_Course_Creator
 AWS_REGION=us-east-1
 ```
+## ✅ Running Tests Locally
 
-### 3. Run all tests
+### 1. Run all tests
 
 ```bash
 npx playwright test --grep @regression
 ```
 
-### 4. Run smoke tests
+### 2. Run smoke tests
 
 ```bash
 npx playwright test --grep @smoke
 ```
 
-### 5. Run a specific test file
+### 3. Run a specific test file
 
 ```bash
 npx playwright test tests/course-creation.spec.ts
 ```
 
-### 6. Run tests sequentially (no parallel execution)
+### 4. Run tests sequentially (no parallel execution)
 
 ```bash
 npx playwright test --workers=1
 ```
 
-### 7. Run tests with custom parallelism
+### 5. Run tests with custom parallelism
 
 ```bash
 npx playwright test --workers=4
 ```
+
+### Open HTML report
+
+```bash
+npx playwright show-report
+```
+
+## ✅ Running Tests from GitHub Actions 
+
+The CI/CD pipeline is configured using **GitHub Actions** to:
+- Automatically run all tests on each push to the `main` branch
+- Generate an HTML test report
+- (Intended to) deploy the report to **GitHub Pages**
+
+> To manually trigger the pipeline, just push code to the `main` branch or use the "Re-run jobs" option in the Actions tab.
+
+---
+
+## 📦 GitHub Pages Test Report (Running from CI/CD GitHub Actions)
+
+❌ **Currently not working as expected**
+
+➡️ **Intended Test Report Link**  
+* https://lerryalexander.github.io/playwright-thinkific-framework/
+
+> ⚠️ I encountered a deployment issue in the GitHub Pages step of the pipeline that I didn’t have time to fully resolve before submission. The report generation works locally, and the project is set up correctly for eventual GitHub Pages deployment.
 
 ## 🐳 Run Tests with Docker Compose
 
@@ -116,17 +186,6 @@ npx playwright test --workers=4
 ```bash
 docker-compose up --build
 ```
-
-### Open HTML report
-
-```bash
-npx playwright show-report
-```
-
-## 📦 GitHub Pages Test Report (Running from CI/CD Github actions)
-
-➡️ **Test Report Link**  
-* https://lerryalexander.github.io/playwright-thinkific-framework/
 
 ---
 
